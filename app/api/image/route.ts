@@ -1,16 +1,12 @@
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { Configuration, OpenAIApi } from "openai";
+import { HfInference } from "@huggingface/inference";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const client = new HfInference(process.env.HF_API_KEY);
 
-const openAi = new OpenAIApi(configuration);
-
-export async function POST(req: Request) {
-  try { 
+export async function POST(req: any) {
+  try {
     const { userId } = auth();
     const body = await req.json();
     const { prompt, amount = 1, resolution = "512x512" } = body;
@@ -19,8 +15,8 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!configuration) {
-      return new NextResponse("OpenAI API Key not configured", { status: 500 });
+    if (!process.env.HF_API_KEY) {
+      return new NextResponse("Hugging Face API Key not configured", { status: 500 });
     }
 
     if (!prompt) {
@@ -41,15 +37,20 @@ export async function POST(req: Request) {
       return new NextResponse("API Limit Exceeded", { status: 403 });
     }
 
-    const response = await openAi.createImage({
-      prompt,
-      n: parseInt(amount, 10),
-      size: resolution,
-    });
+    const images = [];
+    for (let i = 0; i < parseInt(amount, 10); i++) {
+      const image = await client.textToImage({
+        model: "stabilityai/stable-diffusion-3.5-large",
+        inputs: prompt,
+        parameters: { num_inference_steps: 5 },
+        provider: "hf-inference",
+      });
+      images.push(image);
+    }
 
     await increaseApiLimit();
 
-    return NextResponse.json(response.data.data, { status: 200 });
+    return NextResponse.json(images, { status: 200 });
   } catch (error) {
     console.log("[IMAGE_GENERATION_ERROR]", error);
     return new NextResponse("Internal Server Error", { status: 500 });

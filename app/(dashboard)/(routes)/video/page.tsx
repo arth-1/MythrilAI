@@ -29,7 +29,7 @@ const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
 
 
   return (
-    <div>
+    <div className="bg-[rgb(240,234,226)]">
       <Header />
       <br />
       <Heading
@@ -58,6 +58,27 @@ const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
           )}
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

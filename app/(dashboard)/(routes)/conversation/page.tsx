@@ -74,7 +74,7 @@ const ConversationPage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[rgb(240,234,226)]">
       <Header />
       <br />
       <Heading
@@ -139,6 +139,9 @@ const ConversationPage = () => {
           </div>
         </div>
       </div>
+      <br />
+      <br />
+      <br />
     </div>
   );
 };

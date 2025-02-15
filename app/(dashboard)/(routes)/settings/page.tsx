@@ -5,7 +5,7 @@ import { Settings } from "lucide-react";
 
 const SettingsPage = () => {
   return (
-    <div>
+    <div className="bg-[rgb(240,234,226)]">
       <Header />
       <br />
       <Heading 
@@ -20,6 +20,31 @@ const SettingsPage = () => {
           Account settings will be available here.
         </div>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
     </div>
   );
 };
