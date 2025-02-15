@@ -4,28 +4,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 const testimonials = [
   {
-    name: "John Doe",
+    name: "Arth Agrawal",
     avatar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've ever used!",
+    description: "This is the perfect startup companion i could have asked for!",
   },
   {
-    name: "John Doe",
+    name: "Agrim Arya",
     avatar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've ever used!",
+    description: "This is the perfect startup companion i could have asked for!",
   },
   {
-    name: "John Doe",
+    name: "Arth Agrawal",
     avatar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've ever used!",
+    description: "This is the perfect startup companion i could have asked for!",
   },
   {
-    name: "John Doe",
+    name: "Agrim Arya",
     avatar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've ever used!",
+    description: "This is the perfect startup companion i could have asked for!",
   },
 ];
 

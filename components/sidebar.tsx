@@ -32,16 +32,10 @@ const routes = [
     color: "text-pink-700",
   },
   {
-    label: "Video Generation",
+    label: "CSV Data Visualisation",
     icon: VideoIcon,
     href: "/video",
     color: "text-orange-700",
-  },
-  {
-    label: "Music Generation",
-    icon: Music,
-    href: "/music",
-    color: "text-emerald-500",
   },
   {
     label: "Code Generation",
@@ -71,7 +65,7 @@ const Sidebar: FC<SidebarProps> = ({ apiLimitCount = 0, isPro = false }) => {
           <div className="relative w-8 h-8 mr-4">
             <Image fill alt="Logo" src="/logo.png" />
           </div>
-          <h1 className={cn("text-2xl font-bold", montserrat.className)}>Prometheus</h1>
+          <h1 className={cn("text-2xl font-bold", montserrat.className)}>Mythril</h1>
         </Link>
         <div className="space-y-1">
           {routes.map((route) => (

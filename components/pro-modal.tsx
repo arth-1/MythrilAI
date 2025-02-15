@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { useState } from "react";
 
 import useProModal from "@/hooks/use-pro-modal";
@@ -24,19 +23,13 @@ export const ProModal = () => {
       bgColor: "bg-violet-500/10",
     },
     {
-      label: "Music Generation",
-      icon: Music,
-      color: "text-emerald-500",
-      bgColor: "bg-emerald-500/10",
-    },
-    {
       label: "Image Generation",
       icon: ImageIcon,
       color: "text-pink-700",
       bgColor: "bg-pink-700/10",
     },
     {
-      label: "Video Generation",
+      label: "CSV Data Visualisation",
       icon: VideoIcon,
       color: "text-orange-700",
       bgColor: "bg-orange-700/10",
@@ -49,27 +42,13 @@ export const ProModal = () => {
     },
   ];
 
-  const onSubscribe = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get("/api/stripe");
-
-      window.location.href = response.data.url;
-    } catch (error) {
-      console.log("[STRIPE_CLIENT_ERROR]", error);
-      toast.error("Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex justify-center flex-col items-center pb-2 gap-y-4">
             <div className="flex items-center gap-x-2 font-bold py-1">
-              Upgrade to Prometheus Pro
+              Upgrade to Mythril Pro
               <Badge variant="premium" className="uppercase text-sm py-1">
                 pro
               </Badge>
@@ -90,7 +69,7 @@ export const ProModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button disabled={loading} size="lg" variant="premium" className="w-full" onClick={onSubscribe}>
+          <Button disabled size="lg" variant="premium" className="w-full">
             Upgrade <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
         </DialogFooter>

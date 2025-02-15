@@ -1,5 +1,4 @@
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
-import { checkSubscription } from "@/lib/subscription";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
@@ -11,7 +10,7 @@ const configuration = new Configuration({
 const openAi = new OpenAIApi(configuration);
 
 export async function POST(req: Request) {
-  try {
+  try { 
     const { userId } = auth();
     const body = await req.json();
     const { prompt, amount = 1, resolution = "512x512" } = body;
@@ -37,9 +36,8 @@ export async function POST(req: Request) {
     }
 
     const isAllowed = await checkApiLimit();
-    const isPro = await checkSubscription();
 
-    if (!isAllowed && !isPro) {
+    if (!isAllowed) {
       return new NextResponse("API Limit Exceeded", { status: 403 });
     }
 
@@ -49,13 +47,11 @@ export async function POST(req: Request) {
       size: resolution,
     });
 
-    if (!isPro) {
-      await increaseApiLimit();
-    }
+    await increaseApiLimit();
 
     return NextResponse.json(response.data.data, { status: 200 });
   } catch (error) {
-    console.log("[CONVERSATION_ERROR]", error);
+    console.log("[IMAGE_GENERATION_ERROR]", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }
 }

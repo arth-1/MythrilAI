@@ -11,7 +11,9 @@
   "dependencies": {
     "@clerk/nextjs": "^4.23.0",
     "@hookform/resolvers": "^3.1.1",
-    "@prisma/client": "^5.0.0",
+    "@huggingface/inference": "^3.3.4",
+    "@prisma/client": "^6.3.1",
+    "@prisma/extension-accelerate": "^1.2.2",
     "@radix-ui/react-avatar": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-label": "^2.0.2",
@@ -22,7 +24,8 @@
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
-    "axios": "^1.4.0",
+    "axios": "^1.7.9",
+    "chart.js": "^4.4.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "crisp-sdk-web": "^1.0.19",
@@ -31,12 +34,15 @@
     "lucide-react": "^0.263.0",
     "next": "13.4.12",
     "openai": "^3.3.0",
+    "papaparse": "^5.5.2",
     "postcss": "8.4.27",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.45.2",
     "react-hot-toast": "^2.4.1",
     "react-markdown": "^8.0.7",
+    "recharts": "^2.15.1",
     "replicate": "^0.12.3",
     "stripe": "^12.16.0",
     "tailwind-merge": "^1.14.0",
@@ -44,10 +50,12 @@
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.1.6",
     "typewriter-effect": "^2.20.1",
+    "xlsx": "^0.18.5",
     "zod": "^3.21.4",
     "zustand": "^4.3.9"
   },
   "devDependencies": {
-    "prisma": "^5.0.0"
+    "@types/papaparse": "^5.3.15",
+    "prisma": "^5.22.0"
   }
 }

@@ -21,6 +21,7 @@ import useProModal from "@/hooks/use-pro-modal";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import { amountOptions, formSchema, resolutionOptions } from "./constants";
+import Header from "@/components/Header";
 
 const ImagePage = () => {
   const router = useRouter();
@@ -62,6 +63,8 @@ const ImagePage = () => {
 
   return (
     <div>
+      <Header />
+      <br />
       <Heading
         title="Image Generation"
         description="Our most advanced AI Image Generation model."

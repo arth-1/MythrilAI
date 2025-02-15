@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { Code } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ChatCompletionRequestMessage } from "openai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactMarkdown from "react-markdown";
@@ -23,38 +22,53 @@ import { cn } from "@/lib/utils";
 import useProModal from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 import { formSchema } from "./constants";
+import Header from "@/components/Header";
+
+// Define your own message type
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 const CodePage = () => {
   const router = useRouter();
   const proModal = useProModal();
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      prompt: "",
-    },
+    defaultValues: { prompt: "" },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
-      const userMessage: ChatCompletionRequestMessage = {
+      // Create the user message
+      const userMessage: Message = {
         role: "user",
         content: values.prompt,
       };
+
+      // Append the user message to the conversation history
       const newMessages = [...messages, userMessage];
 
+      // Post the messages to your API route (which now uses Hugging Face)
       const response = await axios.post("/api/code", {
         messages: newMessages,
       });
 
-      setMessages((current) => [...current, userMessage, response.data]);
+      // Convert the response text to a message object for the assistant
+      const assistantMessage: Message = {
+        role: "assistant",
+        content: response.data.text,
+      };
+
+      // Update the messages state with both messages
+      setMessages((current) => [...current, userMessage, assistantMessage]);
       form.reset();
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
@@ -67,6 +81,8 @@ const CodePage = () => {
 
   return (
     <div>
+      <Header />
+      <br />
       <Heading
         title="Code Generation"
         description="Our most advanced AI Code Generation model."

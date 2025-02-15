@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import Header from "@/components/Header";
 
 const tools = [
 	{
@@ -22,13 +23,6 @@ const tools = [
 		href: "/conversation",
 	},
 	{
-		label: "Music Generation",
-		icon: Music,
-		color: "text-emerald-500",
-		bgColor: "bg-emerald-500/10",
-		href: "/music",
-	},
-	{
 		label: "Image Generation",
 		icon: ImageIcon,
 		color: "text-pink-700",
@@ -36,7 +30,7 @@ const tools = [
 		href: "/image",
 	},
 	{
-		label: "Video Generation",
+		label: "CSV Data Visualisation",
 		icon: VideoIcon,
 		color: "text-orange-700",
 		bgColor: "bg-orange-700/10",
@@ -56,13 +50,14 @@ const DashboardPage = () => {
 
 	return (
 		<div>
+			<Header />
+			<br />
 			<div className="mb-8 space-y-4">
 				<h2 className="text-2xl md:text-4xl font-bold text-center">
 					Explore the power of AI
 				</h2>
 				<p className="text-muted-foreground font-light text-sm md:text-lg text-center">
-					Prometheus is a platform that allows you to generate music, videos,
-					and code using the power of AI.
+					Mythril is a startup companion that gives you business related advice and helps in overall startup Journey.
 				</p>
 			</div>
 			<div className="px-4 md:px-20 lg:px-32 space-y-4">

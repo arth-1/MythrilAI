@@ -1,17 +1,12 @@
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
-import { checkSubscription } from "@/lib/subscription";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
-import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
+import { HfInference } from "@huggingface/inference";
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const client = new HfInference(process.env.HF_API_KEY!);
 
-const openAi = new OpenAIApi(configuration);
-
-const instructionMessage: ChatCompletionRequestMessage = {
-  role: "system",
+const instructionMessage = {
+  role: "user",
   content: "You are a code generator. You must answer only in markdown code snippets. Use code comments for explanations.",
 };
 
@@ -25,8 +20,8 @@ export async function POST(req: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    if (!configuration) {
-      return new NextResponse("OpenAI API Key not configured", { status: 500 });
+    if (!process.env.HF_API_KEY) {
+      return new NextResponse("Hugging Face API Key not configured", { status: 500 });
     }
 
     if (!messages) {
@@ -34,24 +29,29 @@ export async function POST(req: Request) {
     }
 
     const isAllowed = await checkApiLimit();
-    const isPro = await checkSubscription();
 
-    if (!isAllowed && !isPro) {
+    if (!isAllowed) {
       return new NextResponse("API Limit Exceeded", { status: 403 });
     }
 
-    const response = await openAi.createChatCompletion({
-      model: "gpt-3.5-turbo",
+    const response = await client.chatCompletion({
+      model: "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
       messages: [instructionMessage, ...messages],
+      provider: "hf-inference",
+      max_tokens: 500,
     });
 
-    if (!isPro) {
-      await increaseApiLimit();
-    }
+    await increaseApiLimit();
 
-    return NextResponse.json(response.data.choices[0].message, { status: 200 });
-  } catch (error) {
-    console.log("[CODE_ERROR]", error);
-    return new NextResponse("Internal Server Error", { status: 500 });
+    return NextResponse.json(
+      { text: response.choices?.[0]?.message?.content || "No response generated." },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("[CODE_ERROR]", error);
+    return new NextResponse(
+      JSON.stringify({ error: "Internal Server Error", details: error.message || error }),
+      { status: 500 }
+    );
   }
 }

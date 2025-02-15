@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import { MessageSquare } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { ChatCompletionRequestMessage } from "openai";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -22,38 +21,48 @@ import { cn } from "@/lib/utils";
 import useProModal from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 import { formSchema } from "./constants";
+import Header from "@/components/Header";
+
+// Define a simple message type for conversation messages
+type Message = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 const ConversationPage = () => {
   const router = useRouter();
   const proModal = useProModal();
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      prompt: "",
-    },
+    defaultValues: { prompt: "" },
   });
 
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
     try {
-      const userMessage: ChatCompletionRequestMessage = {
+      const userMessage: Message = {
         role: "user",
         content: values.prompt,
       };
+
       const newMessages = [...messages, userMessage];
 
       const response = await axios.post("/api/conversation", {
         messages: newMessages,
       });
 
-      setMessages((current) => [...current, userMessage, response.data]);
+      const assistantMessage: Message = {
+        role: "assistant",
+        content: response.data.text,
+      };
+
+      setMessages((current) => [...current, userMessage, assistantMessage]);
       form.reset();
     } catch (error: any) {
-      console.log(error);
+      console.error(error);
       if (error?.response?.status === 403) {
         proModal.onOpen();
       } else {
@@ -66,6 +75,8 @@ const ConversationPage = () => {
 
   return (
     <div>
+      <Header />
+      <br />
       <Heading
         title="Conversation"
         description="Our most advanced AI conversation model."
@@ -107,14 +118,18 @@ const ConversationPage = () => {
               <Loader />
             </div>
           )}
-          {messages.length === 0 && !isLoading && <Empty label="Start typing to have a conversation." />}
+          {messages.length === 0 && !isLoading && (
+            <Empty label="Start typing to have a conversation." />
+          )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={cn(
                   "p-8 w-full flex items-start gap-x-8 rounded-lg",
-                  message.role === "user" ? "bg-white border border-black/10" : "bg-muted"
+                  message.role === "user"
+                    ? "bg-white border border-black/10"
+                    : "bg-muted"
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
