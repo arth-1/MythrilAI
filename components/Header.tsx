@@ -20,7 +20,7 @@ const Header = () => {
             Upgrade <Zap className="w-4 h-4 ml-2 fill-white" />
           </Button>
           
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" className="bg-[rgb(240,234,226)]">
             <Link href="/dashboard">Dashboard</Link>
           </Button>
           

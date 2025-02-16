@@ -98,8 +98,8 @@ const ConversationPage = () => {
                     <FormControl className="m-0 p-0">
                       <Input
                         {...field}
-                        placeholder="Start typing here..."
-                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                        placeholder="  Start typing here..."
+                        className="border-0 outline-none focus-visible:ring-1 focus-visible:ring-transparent"
                         disabled={isLoading}
                       />
                     </FormControl>

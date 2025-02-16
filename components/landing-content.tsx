@@ -13,7 +13,7 @@ const testimonials = [
     name: "Agrim Arya",
     avatar: "A",
     title: "Software Engineer",
-    description: "This is the perfect startup companion i could have asked for!",
+    description: "This is the perfect partner for any startup. Couldn't have asked for better!",
   },
   {
     name: "Arth Agrawal",
@@ -25,7 +25,7 @@ const testimonials = [
     name: "Agrim Arya",
     avatar: "A",
     title: "Software Engineer",
-    description: "This is the perfect startup companion i could have asked for!",
+    description: "This is the perfect partner for any startup. Couldn't have asked for better!",
   },
 ];
 

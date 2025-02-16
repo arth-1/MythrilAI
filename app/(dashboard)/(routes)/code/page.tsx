@@ -104,7 +104,7 @@ const CodePage = () => {
                     <FormControl className="m-0 p-0">
                       <Input
                         {...field}
-                        placeholder="Start typing here..."
+                        placeholder="  Start typing here..."
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
                       />

@@ -15,16 +15,16 @@ const Footer = () => {
 
         {/* Social Links */}
         <div className="flex space-x-4 mb-6">
-          <a href="https://facebook.com" className="hover:text-gray-400">
+          <a href="https://www.facebook.com/share/1B2iKke54K/?mibextid=qi2Omg" className="hover:text-gray-400">
             <Facebook size={24} />
           </a>
-          <a href="https://x.com" className="hover:text-gray-400">
+          <a href="https://x.com/MythrilAi35?t=E_KLN0bnv7FvPvyj-qK9BA&s=09" className="hover:text-gray-400">
             <Twitter size={24} />
           </a>
-          <a href="https://instagram.com" className="hover:text-gray-400">
+          <a href="https://www.instagram.com/mythrilai?igsh=aXoyMzNvNmVrNTM2" className="hover:text-gray-400">
             <Instagram size={24} />
           </a>
-          <a href="https://linkedin.com" className="hover:text-gray-400">
+          <a href="http://www.linkedin.com/in/mythril-ai-7a7681351" className="hover:text-gray-400">
             <Linkedin size={24} />
           </a>
         </div>
@@ -32,7 +32,7 @@ const Footer = () => {
         {/* Contact Button */}
         <div className="mb-6">
           <a
-            href="mailto:contact@mythrilai.com"
+            href="mailto:mythrilai35@gmail.com"
             className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg"
           >
             <Mail size={20} /> Contact Us
