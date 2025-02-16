@@ -21,6 +21,11 @@ Mythril AI is a startup advisor companion that provides:
 
 ## Screenshots
 
+![Screenshot 2025-02-16 062732](https://github.com/user-attachments/assets/20842e77-a385-4ce2-a5c0-487909bb69df)![Screenshot 2025-02-16 053027](https://github.com/user-attachments/assets/bdbf14ca-2aa5-4322-bb97-f7c0b0ebfea8)
+![Screenshot 2025-02-16 063441](https://github.co![Screenshot 2025-02-16 062651](https://github.com/user-attachments/assets/a0d439b7-e8aa-4171-902f-2a8d2ea5a1f1)
+![Screenshot 2025-02-16 053041](https://github.com/user-attachments/assets/684fa576-84fb-40cb-8e21-ff4078c3f902)
+m/user-attachments/assets/d930a4a4-7efd-4ec5-ab3d-029e6386e57b)
+
 
 
 ## Getting Started
