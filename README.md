@@ -7,13 +7,21 @@ Mythril AI is a startup advisor companion that provides:
 
 ## Tech Stack
 
-- **Next.js & TypeScript**: Frontend framework and language.
-- **Huggingface Integration**: Powerful AI models.
-- **Tailwind CSS**: Styling and responsive design.
-- **Prisma**: Database ORM.
-- **Clerk**: User authentication.
+- **Frontend**: Next.js, React, Tailwind CSS, ShadCn UI, Radix UI, Lucide React
+- **Backend**: Next.js API routes, Prisma ORM (with Accelerate extension)
+- **Database**: PostgreSQL (via Prisma)
+- **Authentication**: Clerk
+- **AI/ML Integration**: Hugging Face (Deepseek & Stable-Diffusion)
+- **State Management**: Zustand
+- **Forms & Validations**: React Hook Form, Zod, Hookform Resolvers
+- **Data Processing**: PapaParse, XLSX
+- **Charting & Visualization**: Chart.js, Recharts, React-Chartjs-2
+- **Utilities**: Axios, Typewriter Effect, Clsx
+- **Linting & Type Safety**: ESLint, TypeScript
 
 ## Screenshots
+
+
 
 ## Getting Started
 
