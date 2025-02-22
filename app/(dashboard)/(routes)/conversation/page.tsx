@@ -22,6 +22,7 @@ import useProModal from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 import { formSchema } from "./constants";
 import Header from "@/components/Header";
+import ReactMarkdown from "react-markdown";
 
 // Define a simple message type for conversation messages
 type Message = {
@@ -135,8 +136,14 @@ const ConversationPage = () => {
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+            <div className="prose">
+              {message.role === "assistant" ? (
+                <ReactMarkdown>{message.content}</ReactMarkdown>
+              ) : (
                 <p className="text-sm">{message.content}</p>
-              </div>
+              )}
+            </div>
+          </div>
             ))}
           </div>
         </div>
