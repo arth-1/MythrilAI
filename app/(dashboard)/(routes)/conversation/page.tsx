@@ -50,13 +50,15 @@ const ConversationPage = () => {
 
       const newMessages = [...messages, userMessage];
 
+      console.log("Sending request with:", JSON.stringify({ messages: newMessages })); // Debugging
+
       const response = await axios.post("/api/conversation", {
         messages: newMessages,
       });
 
       const assistantMessage: Message = {
         role: "assistant",
-        content: response.data.text,
+        content: response.data.response, // Changed from response.data.text
       };
 
       setMessages((current) => [...current, userMessage, assistantMessage]);
