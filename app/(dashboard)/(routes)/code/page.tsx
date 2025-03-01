@@ -61,7 +61,7 @@ const CodePage = () => {
       // Convert the response text to a message object for the assistant
       const assistantMessage: Message = {
         role: "assistant",
-        content: response.data.text,
+        content: response.data.response,
       };
 
       // Update the messages state with both messages
@@ -135,19 +135,13 @@ const CodePage = () => {
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <ReactMarkdown
-                  className="text-sm overflow-hidden leading-7"
-                  components={{
-                    pre: ({ node, ...props }) => (
-                      <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
-                        <pre {...props} />
-                      </div>
-                    ),
-                    code: ({ node, ...props }) => <code className="rounded-sm p-1 bg-black/10" {...props} />,
-                  }}
-                >
-                  {message.content || ""}
-                </ReactMarkdown>
+                    <div className="prose">
+                  {message.role === "assistant" ? (
+                    <ReactMarkdown>{message.content}</ReactMarkdown>
+                  ) : (
+                      <p className="text-sm">{message.content}</p>
+                      )}
+                  </div>
               </div>
             ))}
           </div>
